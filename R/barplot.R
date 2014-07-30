@@ -31,10 +31,11 @@ barplot <- function(data, title="", xlab="", ylab="", barIndex=NULL, label="*") 
     d$sample <- factor(d$sample, levels=colnames(data))
 
     p <- ggplot(d, aes(sample, mean))
-    p <- p+geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd, width=0.2),
-                         position=position_dodge(width=0.8))
     p <- p+geom_bar(aes(fill=sample), stat="identity",
                     position=position_dodge(width=0.8)) ##, colour="black")
+    p <- p+geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd, width=0.2),
+                         position=position_dodge(width=0.8))
+
     ## p <- p+scale_fill_manual(values=c("grey80", "white"))
     ## p <- p+scale_y_continuous(expand=c(0,0), limits=c(0,1.2), breaks=seq(0,1.2, by=0.2))
     
