@@ -59,14 +59,14 @@ barplot <- function(data, title="", xlab="", ylab="", barIndex=NULL, label="*") 
 addLabel <- function(p, barIndex, label="*") {
     d <- p$data
     lw <- d$mean+d$sd
-    lw <- lw[barIndex] * 1.05
+    lw <- lw[barIndex]
+    lw <- lw + min(lw) * 0.05
     up <- max(lw * 1.1)
  
     p <- p+geom_segment(x=barIndex[1], y=lw[1], xend=barIndex[1], yend=up)
     p <- p+geom_segment(x=barIndex[2], y=lw[2], xend=barIndex[2], yend=up)
     p <- p+geom_segment(x=barIndex[1], y=up, xend=barIndex[2], yend=up)
-    pos <- up - (up-max(lw))/6
-    p <- p+annotate("text", x=mean(barIndex),y=pos, label=label)
+    p <- p+annotate("text", x=mean(barIndex),y=up*1.02, label=label)
     p <- p+scale_y_continuous(expand=c(0,0), limits=c(0, up*1.05))
     return(p)
 }
