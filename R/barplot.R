@@ -3,7 +3,6 @@
 ##' barplot
 ##' @title barplot 
 ##' @param data data.frame
-##' @param font.size font size
 ##' @param title plot title
 ##' @param xlab xlab
 ##' @param ylab ylab
@@ -19,6 +18,7 @@
 ##' @importFrom ggplot2 ggtitle
 ##' @importFrom ggplot2 xlab
 ##' @importFrom ggplot2 ylab
+##' @importFrom ggplot2 position_dodge
 ##' @export
 ##' @examples
 ##' df <- data.frame(Normal=c(0.83,0.79,0.99,0.69), Cancer=c(0.56,0.56,0.64,0.52))
@@ -55,6 +55,7 @@ barplot <- function(data, title="", xlab="", ylab="", barIndex=NULL, label="*") 
 ##' @importFrom ggplot2 geom_segment
 ##' @importFrom ggplot2 annotate
 ##' @importFrom ggplot2 aes
+##' @importFrom ggplot2 scale_y_continuous
 addLabel <- function(p, barIndex, label="*") {
     d <- p$data
     lw <- d$mean+d$sd

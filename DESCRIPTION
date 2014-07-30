@@ -1,0 +1,22 @@
+Package: yplots
+Type: Package
+Title: Yu's plot utilities
+Version: 0.0.1
+Author: Guangchuang Yu
+Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
+Description: Yu's plot utilities
+Depends:
+    R (>= 3.0.0)
+Imports:
+    ggplot2
+Suggests:
+    DOSE,
+    GOSemSim,
+    clusterProfiler,
+    ReactomePA,
+    ChIPseeker,
+    knitr
+VignetteBuilder: knitr
+License: Artistic-2.0
+Packaged: 2014-07-30 08:16:14 UTC; root
+biocViews: Visualization
