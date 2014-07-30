@@ -3,8 +3,8 @@
 ## DEMO ##
 ### barplot ###
 ```
- df <- data.frame(Normal=c(0.83,0.79,0.99,0.69), Cancer=c(0.56,0.56,0.64,0.52))
-barplot(df, barIndex=c(1,2), label="*") + theme_bw(base_size=16)
+x=data.frame(matrix(abs(rnorm(100)), ncol=5))
+barplot(x, barIndex=c(1,3), label="*")
 ```
 ![](inst/extdata/figures/barplot.png)
 ## Authors ##
