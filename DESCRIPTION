@@ -1,14 +1,18 @@
 Package: yplots
 Type: Package
 Title: Yu's plot utilities
-Version: 0.0.1
+Version: 0.0.2
 Author: Guangchuang Yu
 Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
 Description: Yu's plot utilities
 Depends:
     R (>= 3.0.0)
 Imports:
-    ggplot2
+    ggplot2,
+    RColorBrewer,
+    wordcloud,
+    RISmed,
+    plyr
 Suggests:
     DOSE,
     GOSemSim,

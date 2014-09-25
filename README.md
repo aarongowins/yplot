@@ -7,6 +7,16 @@ x=data.frame(matrix(abs(rnorm(100)), ncol=5))
 barplot(x, barIndex=c(1,3), label="*")
 ```
 ![](inst/extdata/figures/barplot.png)
+
+### Pubmed Trend ###
+```
+term = c("H7N9", "H5N1")
+pm=lapply(term, getPubmedTrend, year=2001:2014)
+names(pm) = term
+plotPubmedTrend(pm)
+```
+![](inst/extdata/figures/pm.png)
+
 ## Authors ##
 
 Guangchuang YU, School of Public Health, The University of Hong Kong [http://ygc.name](http://ygc.name)
