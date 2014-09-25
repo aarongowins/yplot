@@ -41,9 +41,10 @@ plotPubmedTrend <- function(x) {
     if (is(x, "list")) {
         df <- ldply(x)
         colnames(df)[1] <- "TERM"
-        p <- ggplot(df, aes(year, number, color=TERM))+geom_point(size=3) + geom_line()
+        p <- ggplot(df, aes(factor(year), number, group=TERM, color=TERM))+
+            geom_point(size=3) + geom_line()
     } else {
-        p <- ggplot(x, aes(year, number))+geom_point(size=3) + geom_line()
+        p <- ggplot(x, aes(factor(year), number))+geom_point(size=3) + geom_line()
     }
     return(p)
 }
