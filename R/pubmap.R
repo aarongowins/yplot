@@ -9,6 +9,8 @@
 ##' @importFrom plyr ldply
 ##' @export
 getPubmedTrend <- function(searchTerm, year) {
+    if (length(searchTerm) == 1)
+        return(getPubmedTrend.internal(searchTerm, year))
     res <- lapply(searchTerm, getPubmedTrend.internal, year=year)
     names(res) <- searchTerm
     res.df <- ldply(res)
