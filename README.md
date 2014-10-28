@@ -11,8 +11,7 @@ barplot(x, barIndex=c(1,3), label="*")
 ### Pubmed Trend ###
 ```
 term = c("H7N9", "H5N1")
-pm=lapply(term, getPubmedTrend, year=2001:2014)
-names(pm) = term
+pm=getPubmedTrend(term, year=2001:2014)
 plotPubmedTrend(pm)
 ```
 ![](inst/extdata/figures/pm.png)

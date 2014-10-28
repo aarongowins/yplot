@@ -50,7 +50,7 @@ plotPubmedTrend <- function(x) {
     ##     df <- ldply(x)
     ##     colnames(df)[1] <- "TERM"
     if (ncol(x) == 3 && "TERM" %in% colnames(df)) {
-        p <- ggplot(df, aes(factor(year), number, group=TERM, color=TERM))+
+        p <- ggplot(x, aes(factor(year), number, group=TERM, color=TERM))+
             geom_point(size=3) + geom_line()
     } else {
         p <- ggplot(x, aes(factor(year), number))+geom_point(size=3) + geom_line()
