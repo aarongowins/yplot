@@ -6,10 +6,19 @@
 ##' @param year year vector 
 ##' @return plot
 ##' @author ygc
-##' @importFrom RISmed EUtilsSummary
-##' @importFrom RISmed QueryCount
+##' @importFrom plyr ldply
 ##' @export
 getPubmedTrend <- function(searchTerm, year) {
+    res <- lapply(searchTerm, getPubmedTrend.internal, year=year)
+    names(res) <- searchTerm
+    res.df <- ldply(res)
+    colnames(res.df)[1] <- "TERM"
+    return(res.df)
+}
+
+##' @importFrom RISmed EUtilsSummary
+##' @importFrom RISmed QueryCount
+getPubmedTrend.internal <- function(searchTerm, year) {
     num <- array()
     x <- 1
     for (i in year){
@@ -34,13 +43,13 @@ getPubmedTrend <- function(searchTerm, year) {
 ##' @importFrom ggplot2 aes
 ##' @importFrom ggplot2 geom_point
 ##' @importFrom ggplot2 geom_line
-##' @importFrom plyr ldply
 ##' @export
 plotPubmedTrend <- function(x) {
     year <- number <- TERM <- NULL
-    if (is(x, "list")) {
-        df <- ldply(x)
-        colnames(df)[1] <- "TERM"
+    ## if (is(x, "list")) {
+    ##     df <- ldply(x)
+    ##     colnames(df)[1] <- "TERM"
+    if (ncol(x) == 3 && "TERM" %in% colnames(df)) {
         p <- ggplot(df, aes(factor(year), number, group=TERM, color=TERM))+
             geom_point(size=3) + geom_line()
     } else {
