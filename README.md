@@ -10,7 +10,7 @@ barplot(x, barIndex=c(1,3), label="*")
 
 ### Pubmed Trend ###
 ```
-term = c("H7N9", "H5N1")
+term = c('"H7N9"', '"H5N1"', '"RSV"')
 pm=getPubmedTrend(term, year=2001:2014)
 plotPubmedTrend(pm)
 ```
