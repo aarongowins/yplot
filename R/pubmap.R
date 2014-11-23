@@ -55,7 +55,7 @@ plotPubmedTrend <- function(x) {
         p <- ggplot(x, aes(factor(year), number, group=TERM, color=TERM))+
             geom_point(size=3) + geom_line()
     } else {
-        p <- ggplot(x, aes(factor(year), number))+geom_point(size=3) + geom_line()
+        p <- ggplot(x, aes(year, number))+geom_point(size=3) + geom_line()
     }
     return(p)
 }
@@ -110,37 +110,45 @@ getPubmed <- function(searchTerm) {
 ##' @author ygc
 ##' @importFrom RColorBrewer brewer.pal
 ##' @importFrom wordcloud wordcloud
-abstractWordcloud <- function(abstract) {
+abstractWordcloud <- function(abstract, n=35) {
     abs <- as.character(abstract)
     abs.wd <- unlist(strsplit(abs, " "))
     abs.wd <- sub("\\,", "", abs.wd)
     abs.wd <- sub("\\.", "", abs.wd)
+    abs.wd <- gsub("\\((\\w+)\\)", "\\1", abs.wd)
     abs.tab <- table(abs.wd)
 
     rm.word <- c(
-        "a", "also", "an", "and", "as", "As", "are",   
-        "be", "by",
-        "can", "could", "current", 
-        "describe", 
+        "a", "also", "an", "and", "as", "As", "are", "at",   
+        "be", "been", "between", "both", "but", "by",
+        "can", "cause", "compared", "could", "current", 
+        "describe", "data", 
         "easily", "exerts", 
         "Finally", "first", "FIRST", "for", "from", "found", "further", 
+        "group",
         "has", "have", "Here", 
-        "is", "in", "In", "including", "into", "its",   
+        "is", "in", "In", "including", "increase", "increased", "into", "its",   
         "mainly", "may", "many", "Moreover", "most",
         "not",
         "of", "on", "or", "other", "our", "Our", 
         "play", "plays", "present", "provided", "providing", 
         "remains", "reported", "resulted", "revealed", 
-        "several", "showed", "studies", "such", 
-        "that", "the", "The", "then", "therefore", "these", "These", "This", "to", "total", "through", "thus", 
+        "several", "showed", "studies", "study", "such", 
+        "than", "that", "the", "The", "then", "therefore", "these", "These", "this", "This", "to", "To", "total", "through", "thus", 
         "under", "used", "using",
         "various", "via", 
         "was", "we", "We", "well", "were", "which", "with" 
         )
     
     abs.tab <- abs.tab[! names(abs.tab) %in% rm.word]
+    abs.tab <- abs.tab[! names(abs.tab) %in% LETTERS[1:26]]
+    abs.tab <- abs.tab[! names(abs.tab) %in% letters[1:26]]
+    abs.tab <- abs.tab[! names(abs.tab) %in% as.character(0:9)]
+    
     pal2 <- brewer.pal(8,"Dark2")
-    wordcloud(names(abs.tab), abs.tab,min.freq=2,
+
+    abs2 <- sort(abs.tab, decreasing = TRUE)
+    wordcloud(names(abs2)[1:n], abs2[1:n],min.freq=2,
               max.words=Inf, random.order=TRUE,
               rot.per=.15, colors=pal2)
 
