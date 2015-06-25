@@ -1,4 +1,4 @@
-Package: yplots
+Package: yplot
 Type: Package
 Title: Yu's plot utilities
 Version: 0.0.2

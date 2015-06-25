@@ -77,7 +77,7 @@ plotPubmedTrend <- function(x) {
 ##' @importFrom RISmed ISSN
 ##' @importFrom RISmed Author
 ##' @importFrom RISmed Affiliation
-##' @importFrom RISmed Year
+##' @importFrom RISmed YearPubmed
 ##' @importFrom RISmed Issue
 ##' @importFrom RISmed MedlinePgn
 ##' @export
@@ -94,7 +94,7 @@ getPubmed <- function(searchTerm) {
                       authors= sapply(Author(myRecord),
                           function(i) paste(paste(i$LastName, i$Initials), collapse=",")),
                       affiliation= Affiliation(myRecord),
-                      year=Year(myRecord),
+                      year=YearPubmed(myRecord),
                       issue=Issue(myRecord),
                       page=MedlinePgn(myRecord)
                       )
